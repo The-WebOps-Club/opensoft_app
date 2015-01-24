@@ -4,12 +4,24 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import opensoft.util.ListElement;
+import opensoft.util.ListElementAdapter;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -52,7 +64,7 @@ public class MainActivity extends ActionBarActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
-
+        ListElementAdapter adapter;
         public PlaceholderFragment() {
         }
 
@@ -60,6 +72,30 @@ public class MainActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            ListView list=(ListView) rootView.findViewById(R.id.listviewmain);
+            List<ListElement> data=new ArrayList<>();
+            data.add(new ListElement("first","caption"));
+            data.add(new ListElement("second"));
+            ListElementAdapter adapter=new ListElementAdapter(rootView.getContext(),R.layout.list_element,data);
+            list.setAdapter(adapter);
+            this.adapter=adapter;
+            EditText searchbar=(EditText) rootView.findViewById(R.id.search_bar);
+            searchbar.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    ;
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    PlaceholderFragment.this.adapter.getFilter().filter(s);
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    ;
+                }
+            });
             return rootView;
         }
     }
