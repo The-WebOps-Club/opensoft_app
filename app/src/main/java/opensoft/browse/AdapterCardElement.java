@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import opensoft.com.opensoft.R;
@@ -15,21 +16,31 @@ import opensoft.com.opensoft.R;
  * Created by vigneshm on 26/01/15.
  */
 public class AdapterCardElement extends RecyclerView.Adapter<AdapterCardElement.CardElementHolder>{
-    private List<CardElement> list;
-
+    private List<CardElement> list=new ArrayList<>();
+    private List<CardElement> filtered_list=new ArrayList<>();
     public AdapterCardElement(List<CardElement> list) {
-        this.list = list;
+        this.filtered_list.addAll(list);
+        this.list.addAll(list);
     }
 
     public int getItemCount() {
-        return list.size();
+        return filtered_list.size();
+    }
+
+    public void refreshData(){
+        System.out.println("refreshing");
+        filtered_list.clear();
+        filtered_list.addAll(list);
+        for(CardElement c:filtered_list) System.out.println(c.title);
+        for(CardElement c:list) System.out.println(c.title);
+        notifyDataSetChanged();
     }
     public void removeFromList(int pos){
-        list.remove(pos);
+        filtered_list.remove(pos);
         notifyItemRemoved(pos);
     }
     public void onBindViewHolder(CardElementHolder contactViewHolder, int i) {
-        CardElement cardElement = list.get(i);
+        CardElement cardElement = filtered_list.get(i);
         contactViewHolder.title.setText(cardElement.title);
         contactViewHolder.content.setText(cardElement.content);
         contactViewHolder.icon.setImageResource(cardElement.icon_ref);

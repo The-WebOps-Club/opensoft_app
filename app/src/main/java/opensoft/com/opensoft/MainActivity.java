@@ -1,5 +1,7 @@
 package opensoft.com.opensoft;
 
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -36,6 +38,7 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new BrowseFragment())
                     .commit();
         }
+
     }
 
 
@@ -106,22 +109,31 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public static class BrowseFragment extends Fragment {
-        AdapterListElement adapter;
+        AdapterCardElement adapter ;
         public BrowseFragment() {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_browse, container, false);
             final RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.card_list);
+            final List<CardElement> list=new ArrayList<>();
+            list.add(new CardElement("first","content"));
+            list.add(new CardElement("second","no content"));
+            final SwipeRefreshLayout swipeRefreshLayout=(SwipeRefreshLayout) rootView.findViewById(R.id.browse_swipe_refresh_layout);
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    swipeRefreshLayout.setRefreshing(true);
+                    adapter.refreshData();
+                    recyclerView.swapAdapter(adapter,false);
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            });
             recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setHasFixedSize(true);
-            List<CardElement> list=new ArrayList<>();
-            list.add(new CardElement("first","content"));
-            list.add(new CardElement("second","no content"));
-            final AdapterCardElement adapter=new AdapterCardElement(list);
+            adapter=new AdapterCardElement(list);
             recyclerView.setAdapter(adapter);
             SwipeableRecyclerViewTouchListener swipeTouchListener =
                     new SwipeableRecyclerViewTouchListener(recyclerView,
