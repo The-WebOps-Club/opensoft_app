@@ -1,4 +1,4 @@
-package opensoft.util;
+package opensoft.search;
 
 import opensoft.com.opensoft.R;
 
