@@ -28,7 +28,7 @@ public class AdapterListElement extends RecyclerView.Adapter<AdapterListElement.
                         "modelData must not be null");
             }
             this.items = modelData;
-            this.filtered_items=modelData;
+            this.filtered_items=new ArrayList<>();
             this.c = c;
         }
 
@@ -81,13 +81,14 @@ public class AdapterListElement extends RecyclerView.Adapter<AdapterListElement.
     public void filter(CharSequence charSequence, Context c) {
         //System.out.println(charSequence);
         filtered_items = new ArrayList<>();
+        if(charSequence.length()>0){
         for(ListElement l : items) {
             //System.out.println(l.info+" "+l.title+" "+(l.info.contains(charSequence) || l.info.contains(charSequence)));
             if(l.title.contains(charSequence) || l.info.contains(charSequence)) {
                 filtered_items.add(l);
                 System.out.println(l.title);
             }
-        }
+        }}
         notifyDataSetChanged();
     }
 
