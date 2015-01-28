@@ -41,7 +41,7 @@ import opensoft.util.Utilities;
 public class DataService extends IntentService {
     public static final int UPDATE_PROGRESS = 8344;
     private static final String TAG = "DataService";
-    private String url_send_note = "";
+    private String url_send_note = "http://rcdn.saarang.org/fetch/";
     DefaultHttpClient mDefaultHttpClient = null;
 
     public DataService() {
