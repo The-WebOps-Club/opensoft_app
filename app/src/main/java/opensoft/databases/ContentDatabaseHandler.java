@@ -177,5 +177,25 @@ public class ContentDatabaseHandler extends SQLiteOpenHelper {
         return contentList;
     }
 
+    public int updateContent(Content content) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+        values.put(KEY_LOCAL_ID, content.getiLocalId());
+        values.put(KEY_SERVER_ID, content.getiServerId());
+        values.put(KEY_TITLE, content.getsTitle());
+        values.put(KEY_SUMMARY, content.getsSummary());
+        values.put(KEY_CONTENT, content.getsContent());
+        values.put(KEY_REV_ID, content.getsRevId());
+        values.put(KEY_PAGE_ID, content.getsPageId());
+        values.put(KEY_SERVER_TIMESTAMP, content.getsServerTimeStamp());
+        values.put(KEY_LOCAL_TIMESTAMP, content.getsLocalTimeStamp());
+        values.put(KEY_IMAGES,content.getSaImagePath().toString());
+
+		// updating row
+		return db.update(TABLE_CONTENT, values, KEY_LOCAL_ID + " = ?",
+				new String[] { String.valueOf(content.getiLocalId()) });
+	}
+
 }
 

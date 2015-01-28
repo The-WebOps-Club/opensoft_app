@@ -1,6 +1,7 @@
 package opensoft.com.opensoft;
 
 import android.content.res.Configuration;
+import android.os.Environment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -27,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -365,6 +367,15 @@ public class MainActivity extends ActionBarActivity {
             }
             return rootView;
         }
+    }
+
+    //Creating file structure
+    void createFileStructure(){
+        File file = new File(Environment.getExternalStorageDirectory()
+                + File.separator + "MPower" // folder name
+        ); // file name
+        // if(!file.exists())
+        file.mkdirs();
     }
 }
 

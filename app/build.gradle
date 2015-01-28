@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 10
+    buildToolsVersion '21.1.2'
 
     defaultConfig {
         applicationId "opensoft.com.opensoft"
@@ -20,9 +20,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:recyclerview-v7:21.0.+'
     compile 'com.android.support:cardview-v7:21.0.+'
     compile 'com.android.support:support-v4:21.0.+'
+    compile files('src/main/java/protobuf-java-2.5.0.jar')
+    compile files('F:/Projects/Opensoft/opensoft_app/libs/protobuf-java-2.5.0.jar')
+    compile files('F:/Projects/Opensoft/opensoft_app/libs/protobuf-java-2.6.0.jar')
 }

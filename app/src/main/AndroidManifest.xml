@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="opensoft.com.opensoft" >
 
+    <uses-sdk
+        android:targetSdkVersion="15"
+        android:minSdkVersion="3"
+        ></uses-sdk>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
