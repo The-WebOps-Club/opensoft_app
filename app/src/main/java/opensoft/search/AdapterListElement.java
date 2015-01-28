@@ -1,5 +1,9 @@
 package opensoft.search;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import android.support.v7.widget.RecyclerView;
 
+import opensoft.com.opensoft.MainActivity;
 import opensoft.com.opensoft.R;
 /**
  * Created by vigneshm on 25/01/15.
@@ -21,7 +26,6 @@ public class AdapterListElement extends RecyclerView.Adapter<AdapterListElement.
         private List<ListElement> items;
         public List<ListElement> filtered_items;
         static Context c;
-
     public AdapterListElement(List<ListElement> modelData, Context c) {
             if (modelData == null) {
                 throw new IllegalArgumentException(
@@ -76,7 +80,18 @@ public class AdapterListElement extends RecyclerView.Adapter<AdapterListElement.
                 imgViewIcon = (ImageView) itemView.findViewById(R.id.icon);
                 txtInfo = (TextView) itemView.findViewById(R.id.info);
                 txtTitle = (TextView) itemView.findViewById(R.id.title);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FragmentManager fragmentManager = ((ActionBarActivity)c).getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_container, new MainActivity.ShowDataFragment());
+                        ((ActionBarActivity)c).getSupportActionBar().setTitle("Browse");
+                        fragmentTransaction.commit();
+                    }
+                });
             }
+
         }
     public void filter(CharSequence charSequence, Context c) {
         //System.out.println(charSequence);
