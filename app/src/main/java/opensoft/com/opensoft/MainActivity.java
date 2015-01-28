@@ -274,16 +274,16 @@ public class MainActivity extends ActionBarActivity {
             recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setHasFixedSize(true);
-            final SwipeRefreshLayout swipeRefreshLayout=(SwipeRefreshLayout) rootView.findViewById(R.id.demand_swipe_refresh_layout);
-            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    swipeRefreshLayout.setRefreshing(true);
-                    adapter.refreshData();
-                    recyclerView.swapAdapter(adapter,false);
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            });
+//            final SwipeRefreshLayout swipeRefreshLayout=(SwipeRefreshLayout) rootView.findViewById(R.id.demand_swipe_refresh_layout);
+//            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//                @Override
+//                public void onRefresh() {
+//                    swipeRefreshLayout.setRefreshing(true);
+//                    adapter.refreshData();
+//                    recyclerView.swapAdapter(adapter,false);
+//                    swipeRefreshLayout.setRefreshing(false);
+//                }
+//            });
             DragSortRecycler dragSortRecycler = new DragSortRecycler();
             //dragSortRecycler.setViewHandleId(R.drawable.ic_launcher); //View you wish to use as the handle
             dragSortRecycler.setLeftDragArea(160);
