@@ -138,8 +138,8 @@ public class ContentDatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Getting single
-    public List<Content> getAllContent() {
-        List<Content> contentList = new ArrayList<Content>();
+    public ArrayList<Content> getAllContent() {
+        ArrayList<Content> contentList = new ArrayList<Content>();
 
         String selectQuery = "SELECT  * FROM " + TABLE_CONTENT;
 
